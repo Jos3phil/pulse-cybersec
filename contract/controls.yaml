@@ -1,0 +1,53 @@
+# Catálogo de controles de Pulse (borrador).
+# Los artículos se completan con el proceso del TDR, sección 4:
+#   1) Gemini 4 Argon lee la norma completa y propone artículo + texto exacto.
+#   2) Una persona lo verifica contra la norma oficial publicada.
+#   3) Se cambia `verificado: false` por `true`. Folio solo usa referencias verificadas.
+version: 0.1
+normas:
+  LEY-29733: {nombre: "Ley N.° 29733, Ley de Protección de Datos Personales"}
+  DS-016-2024-JUS: {nombre: "Reglamento de la Ley N.° 29733 (DS 016-2024-JUS)"}
+  NTS-139: {nombre: "NTS N.° 139-MINSA/2018/DGAIN, gestión de la historia clínica"}
+controles:
+  - control_id: ACC-03
+    dominio: accesos
+    pregunta: "¿Se dan de baja las cuentas que dejan de usarse?"
+    verificable: true
+    agente: vigia
+    peso: 3
+    norma_refs: [{norma: DS-016-2024-JUS, articulo: "[completar]", texto: "[completar]", verificado: false}]
+  - control_id: ACC-04
+    dominio: accesos
+    pregunta: "¿Cada persona usa su propia cuenta?"
+    verificable: true
+    agente: vigia
+    peso: 3
+    norma_refs: [{norma: DS-016-2024-JUS, articulo: "[completar]", texto: "[completar]", verificado: false}]
+  - control_id: LOG-01
+    dominio: trazabilidad
+    pregunta: "¿Queda registro de quién lee cada historia clínica?"
+    verificable: true
+    agente: escriba
+    peso: 3
+    norma_refs: [{norma: NTS-139, articulo: "[completar]", texto: "[completar]", verificado: false}]
+  - control_id: BKP-02
+    dominio: respaldo
+    pregunta: "¿Se prueba que los respaldos se pueden restaurar?"
+    verificable: true
+    agente: escriba
+    peso: 3
+    norma_refs: [{norma: DS-016-2024-JUS, articulo: "[completar]", texto: "[completar]", verificado: false}]
+  - control_id: DOC-01
+    dominio: documentos
+    pregunta: "¿Los documentos de historias se guardan cifrados?"
+    verificable: true
+    agente: archivista
+    peso: 2
+    norma_refs: [{norma: DS-016-2024-JUS, articulo: "[completar]", texto: "[completar]", verificado: false}]
+  - control_id: GOB-01
+    dominio: gobierno
+    pregunta: "¿La clínica designó un Oficial de Datos Personales?"
+    verificable: false
+    agente: cuestionario
+    peso: 2
+    norma_refs: [{norma: DS-016-2024-JUS, articulo: "[completar]", texto: "[completar]", verificado: false}]

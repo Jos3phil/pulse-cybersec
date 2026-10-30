@@ -1,0 +1,60 @@
+# Clínica Inti: OpenEMR oficial SIN modificar + MariaDB.
+# Basado en docker/production/docker-compose.yml del repositorio oficial de OpenEMR
+# (imágenes fijadas por digest para que todos usemos exactamente la misma versión).
+#
+# Uso desde la raíz del repo:
+#   docker compose --env-file .env -f clinic/docker-compose.yml up -d
+#
+# Puertos en tu computadora:
+#   OpenEMR  -> https://localhost:8443  (http://localhost:8080)
+#   MariaDB  -> 127.0.0.1:3307 (solo local; lo usan las herramientas de Pulse)
+services:
+  mysql:
+    restart: unless-stopped
+    image: mariadb:12.3.3@sha256:d46e102fa8b9b72bfcdeb56f9dd538742092119dc8b11f31fe662605cd234cd9
+    command: ['mariadbd', '--character-set-server=utf8mb4']
+    ports:
+      - "127.0.0.1:3307:3306"
+    volumes:
+      - databasevolume:/var/lib/mysql
+      - ./backups:/backups
+    environment:
+      MYSQL_ROOT_PASSWORD: ${CLINIC_DB_ROOT_PASS:?define CLINIC_DB_ROOT_PASS en .env}
+      MARIADB_AUTO_UPGRADE: '1'
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized"]
+      start_period: 1m
+      start_interval: 10s
+      interval: 1m
+      timeout: 5s
+      retries: 3
+  openemr:
+    restart: unless-stopped
+    image: openemr/openemr:latest@sha256:a663b71e5e9a82292eff88895165c5bf443e56412e0820c8fcdde349292661b3
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - logvolume01:/var/log
+      - sitevolume:/var/www/localhost/htdocs/openemr/sites
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_ROOT_PASS: ${CLINIC_DB_ROOT_PASS}
+      MYSQL_USER: openemr
+      MYSQL_PASS: ${CLINIC_APP_DB_PASS:?define CLINIC_APP_DB_PASS en .env}
+      OE_USER: admin
+      OE_PASS: ${CLINIC_OE_ADMIN_PASS:?define CLINIC_OE_ADMIN_PASS en .env}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "/usr/bin/curl", "--fail", "--insecure", "--location", "--show-error", "--silent", "https://localhost/meta/health/readyz"]
+      start_period: 3m
+      start_interval: 10s
+      interval: 1m
+      timeout: 5s
+      retries: 3
+volumes:
+  logvolume01: {}
+  sitevolume: {}
+  databasevolume: {}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "2.0",
+  "run_id": "2026-11-03T15:20:00Z-inti",
+  "executive_summary": [
+    {"text": "Hay una brecha grave en los accesos.", "cites": ["F-ACC-999"]}
+  ],
+  "top_gaps": [],
+  "plan": {"d30": [], "d60": [], "d90": []},
+  "model": {"provider": "vertex-ai", "name": "gemini-4-argon", "prompt_version": "folio-v1"}
+}

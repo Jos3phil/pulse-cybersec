@@ -1,0 +1,7 @@
+# Reemplazar los usuarios por los de GitHub del equipo.
+/clinic/   @usuario-timothy
+/tools/    @usuario-timothy
+/engine/   @usuario-timothy
+/infra/    @usuario-timothy
+/agents/   @usuario-companero
+/contract/ @usuario-timothy @usuario-companero

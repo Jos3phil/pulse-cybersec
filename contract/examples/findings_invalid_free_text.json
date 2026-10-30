@@ -1,0 +1,20 @@
+{
+  "schema_version": "2.0",
+  "run_id": "invalido-texto-libre",
+  "clinic": {"alias": "clinica-inti", "his": "openemr"},
+  "checks": [{"check": "vigia", "status": "completed", "mode": "agent"}],
+  "findings": [
+    {
+      "finding_id": "F-ACC-001",
+      "control_id": "ACC-03",
+      "check": "vigia",
+      "severity": "alta",
+      "evidence_level": "verificado",
+      "title": "Este ejemplo debe ser rechazado",
+      "facts": {"usuario": "Juan Pérez, médico de turno"},
+      "evidence_calls": ["call_001"]
+    }
+  ],
+  "score": {"verified_ratio": 0.1},
+  "signature": {"alg": "HMAC-SHA256", "value": "x"}
+}

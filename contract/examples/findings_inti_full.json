@@ -1,0 +1,56 @@
+{
+  "schema_version": "2.0",
+  "run_id": "2026-11-03T15:20:00Z-inti",
+  "clinic": {"alias": "clinica-inti", "his": "openemr"},
+  "agent_trace_ref": "traces/2026-11-03T15:20:00Z-inti.jsonl",
+  "checks": [
+    {"check": "vigia", "status": "completed", "mode": "agent", "duration_s": 21.4},
+    {"check": "escriba", "status": "completed", "mode": "agent", "duration_s": 33.0},
+    {"check": "archivista", "status": "completed", "mode": "agent", "duration_s": 18.2}
+  ],
+  "findings": [
+    {
+      "finding_id": "F-ACC-001",
+      "control_id": "ACC-03",
+      "check": "vigia",
+      "severity": "alta",
+      "evidence_level": "verificado",
+      "title": "Cuentas sin uso por más de 90 días que siguen activas",
+      "facts": {"inactive_accounts": 7, "total_accounts": 42, "threshold_days": 90},
+      "subjects": ["u_3f9a1c", "u_b72e04"],
+      "evidence_calls": ["call_001"]
+    },
+    {
+      "finding_id": "F-LOG-001",
+      "control_id": "LOG-01",
+      "check": "escriba",
+      "severity": "alta",
+      "evidence_level": "verificado",
+      "title": "No se registra quién lee las historias clínicas",
+      "facts": {"audit_enabled": true, "read_events_logged": false},
+      "evidence_calls": ["call_004"]
+    },
+    {
+      "finding_id": "F-BKP-001",
+      "control_id": "BKP-02",
+      "check": "escriba",
+      "severity": "critica",
+      "evidence_level": "verificado",
+      "title": "El último respaldo no se pudo restaurar",
+      "facts": {"backup_age_days": 40, "restore_ok": false, "error": "RESTORE_FAILED"},
+      "evidence_calls": ["call_007", "call_008"]
+    },
+    {
+      "finding_id": "F-DOC-001",
+      "control_id": "DOC-01",
+      "check": "archivista",
+      "severity": "alta",
+      "evidence_level": "verificado",
+      "title": "Documentos de historias guardados sin cifrar",
+      "facts": {"documents_total": 1240, "documents_unencrypted": 310},
+      "evidence_calls": ["call_011"]
+    }
+  ],
+  "score": {"verified_ratio": 0.38, "by_domain": {"accesos": 0.25, "respaldo": 0.5}},
+  "signature": {"alg": "HMAC-SHA256", "value": "pendiente-de-firma"}
+}

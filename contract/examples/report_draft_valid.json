@@ -1,0 +1,17 @@
+{
+  "schema_version": "2.0",
+  "run_id": "2026-11-03T15:20:00Z-inti",
+  "executive_summary": [
+    {"text": "7 de 42 cuentas no se usan hace más de 90 días y siguen activas.", "cites": ["F-ACC-001"]},
+    {"text": "El último respaldo, de hace 40 días, no se pudo restaurar.", "cites": ["F-BKP-001"]}
+  ],
+  "top_gaps": [
+    {"finding_id": "F-BKP-001", "why_it_matters": "Si hoy ocurre un ataque, la clínica no podría recuperar sus historias.", "norma_refs": ["DS-016-2024-JUS"], "cites": ["F-BKP-001"]}
+  ],
+  "plan": {
+    "d30": [{"text": "Probar y rehacer el respaldo, y dejar constancia de la restauración.", "cites": ["F-BKP-001"]}],
+    "d60": [{"text": "Activar el registro de lecturas de historias clínicas.", "cites": ["F-LOG-001"]}],
+    "d90": [{"text": "Dar de baja las 7 cuentas sin uso y revisar quién las aprobó.", "cites": ["F-ACC-001"]}]
+  },
+  "model": {"provider": "vertex-ai", "name": "gemini-4-argon", "prompt_version": "folio-v1"}
+}
